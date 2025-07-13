@@ -1,0 +1,45 @@
+---
+# tasks file for docker
+
+- name: Add Docker's official GPG key
+  become: yes
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: Add Docker repository
+  become: yes
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_lsb.codename }} stable
+    state: present
+
+- name: Install Docker and related packages
+  become: yes
+  apt:
+    name: 
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    state: present
+    update_cache: yes
+
+- name: Install Docker Compose
+  become: yes
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-86x_64"
+    dest: /usr/local/bin/docker-compose
+    mode: '0755'
+
+- name: Ensure docker group exists
+  become: yes
+  group:
+    name: docker
+    state: present
+
+- name: Add remote user to docker group
+  become: yes
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+

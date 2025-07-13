@@ -1,0 +1,21 @@
+---
+# tasks file for common
+
+- name: Update apt package cache
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Ensure essential packages are installed
+  become: yes
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - vim
+    state: present
+

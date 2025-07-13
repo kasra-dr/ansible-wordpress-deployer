@@ -1,0 +1,19 @@
+---
+# tasks file for wordpress
+
+- name: Create a directory for the wordpress project
+  file:
+    path: "{{ deploy_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy docker-compose template to the server
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ deploy_path }}/docker-compose.yml" 
+
+- name: Start wordpress and db containers using docker-compose
+  community.docker.docker-compose:
+    project_src: "{{ deploy_path }}"
+    state: present
+
