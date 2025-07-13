@@ -25,7 +25,7 @@ The entire workflow is defined using **Ansible Roles** for modularity and reusab
 
 ---
 
-## ⚙️ Project Structure
+##  Project Structure
 
 The project is organized into three main roles:
 * **`common`:** Handles basic server setup, like updating packages, configuring DNS, and installing essential/build tools.
