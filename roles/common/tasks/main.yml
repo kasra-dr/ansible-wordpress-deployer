@@ -17,5 +17,8 @@
       - software-properties-common
       - python3-pip
       - vim
+      - build-essential
+      - python3-dev
+      - libyaml-dev
     state: present
 

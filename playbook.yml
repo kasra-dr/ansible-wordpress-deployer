@@ -1,0 +1,10 @@
+---
+- hosts: webserver
+  become: yes
+  vars_files:
+    - vault.yml
+  roles:
+    - common
+    - docker
+    - wordpress
+
